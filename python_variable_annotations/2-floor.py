@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-""" Basics annotations - floor """
+''' Description:takes a float n as argument and returns the floor of the float
+    Arguments: n: float
+'''
 
 
 def floor(n: float) -> int:
-    """ Function that get a float argument and return the floor of that argument """
+    """Returns the floor of the float."""
     return int(n)
