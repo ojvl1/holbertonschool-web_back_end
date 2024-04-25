@@ -3,7 +3,7 @@
 from collections.abc import Callable
 
 
-def make_multiplier(multiplier: float) -> Callable[[float], float] :
+def make_multiplier(multiplier: float) -> Callable[[float], float]:
     """
         Function that return a function
         that multiplies a float
