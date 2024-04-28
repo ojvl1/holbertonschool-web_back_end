@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 '''
-    Coroutine async_generator
+    Write an asynchronous coroutine that takes in an integer argument
+    (max_delay, with a default value of 10) named wait_random that
+    waits for a random delay between 0 and max_delay
+    (included and float value) seconds and eventually returns it.
 '''
-import asyncio
 import random
-from typing import Generator
+import asyncio
 
 
-async def async_generator() -> Generator[float, None, None]:
+async def wait_random(max_delay: int = 10) -> float:
     '''
-        Coroutine async_generator that takes no arguments.
-        The coroutine will loop 10 times, each time asynchronously wait 1
-        second, then yield a random number between 0 and 10.
+        Receives max_delay in int value
+        Returns a random float
     '''
-    for _ in range(10):
-        # Wait 1 second before yielding the random number between 0 and 10
-        await asyncio.sleep(1)
-        yield random.uniform(0, 10)
+    delay = random.uniform(0, max_delay)
+    await asyncio.sleep(delay)
+    return delay
