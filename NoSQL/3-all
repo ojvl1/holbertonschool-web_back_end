@@ -1,0 +1,3 @@
+// Script that lists all documents in the coollection school
+
+db.school.find()
