@@ -1,9 +1,3 @@
-/*
-  Modify the functions
-  chaging the initialise variables
-  with const and let
-*/
-
 export function taskFirst() {
   const task = 'I prefer const when I can.';
   return task;
