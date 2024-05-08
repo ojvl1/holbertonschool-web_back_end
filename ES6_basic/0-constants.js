@@ -1,4 +1,4 @@
-/* 
+/*
   Modify the functions
   chaging the initialise variables
   with const and let
