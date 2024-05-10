@@ -2,22 +2,17 @@ export default class HolbertonCourse {
   constructor(name, length, students) {
     if (typeof name === 'string') {
       this._name = name;
-    }
-    else {
+    } else {
       throw new TypeError('Name must be a string');
     }
-
     if (typeof length === 'number') {
       this._length = length;
-    }
-    else {
+    } else {
       throw new TypeError('Length must be a number');
     }
-
     if (Array.isArray(students)) {
-      this._students = students;
-    }
-    else {
+      this.students = students; // Use the setter for type checking
+    } else {
       throw new TypeError('Students must be an array of strings');
     }
   }
@@ -26,40 +21,37 @@ export default class HolbertonCourse {
     return this._name;
   }
 
-  set name(newName) {
-    if (typeof newName === 'string'){
-      return this._name = newName;
-    }
-    else {
-      throw new TypeError('Name msut be a string');
+  set name(value) {
+    if (typeof value === 'string') {
+      this._name = value;
+    } else {
+      throw new TypeError('Name must be a string');
     }
   }
 
   get length() {
-    this._length;
+    return this._length;
   }
 
-  set length(newLength) {
-    if (typeof newLength === 'number') {
-      this._length = newLength;
-    }
-    else {
-      throw new TypeError('Lenght must be a number');
+  set length(value) {
+    if (typeof value === 'number') {
+      this._length = value;
+    } else {
+      throw new TypeError('Length must be a number');
     }
   }
 
   get students() {
-    return this._students;
+    return [...this._students]; // Return a copy
   }
 
-  set students(newstudents) {
+  set students(value) {
     if (
-        Array.isArray(newstudents) 
-        && newstudents.every((student) => typeof student === 'string')
-        ) {
-          this._students = [...newstudents];
-        }
-    else {
+      Array.isArray(value)
+      && value.every((student) => typeof student === 'string')
+    ) {
+      this._students = [...value];
+    } else {
       throw new TypeError('Students must be an array of strings');
     }
   }
