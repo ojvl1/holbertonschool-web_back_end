@@ -8,5 +8,5 @@ export default function createInt8TypedArrayj(length, position, value) {
 
   dataView.setInt8(position, value);
 
-  return buffer;
+  return dataView;
 }
