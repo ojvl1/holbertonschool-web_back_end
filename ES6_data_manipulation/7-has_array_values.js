@@ -1,4 +1,10 @@
-export default function hasValuesFromArray(set, array) {
-  const mySet = new Set(array);
-  return mySet.has(set);
+function hasValuesFromArray(set, array) {
+  for (const value of array) {
+    if (!set.has(value)) {
+      return false;
+    }
+  }
+  return true;
 }
+
+export default hasValuesFromArray;
