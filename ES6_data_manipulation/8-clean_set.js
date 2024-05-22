@@ -1,4 +1,4 @@
-export default function cleanSet(set, startString) {
+function cleanSet(set, startString) {
   if (startString === '') {
     return '';
   }
@@ -10,3 +10,4 @@ export default function cleanSet(set, startString) {
   }
   return result.join('-');
 }
+export default cleanSet;
