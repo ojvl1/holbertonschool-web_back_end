@@ -21,6 +21,3 @@ class BasicCache(BaseCaching):
         return self.cache_data.get(key)
         if key == None or key not in self.cache_data:
             return None
-
-if __name__ == "__main__":
-    BasicCache()
