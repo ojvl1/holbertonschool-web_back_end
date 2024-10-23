@@ -5,8 +5,9 @@ Test Cases
 
 import unittest
 from unittest.mock import patch
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 from client import GithubOrgClient
+from fixtures import org_payload, repos_payload, expected_repos, apache2_repos
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -86,6 +87,54 @@ class TestGithubOrgClient(unittest.TestCase):
         """Test that has_license returns the expected value"""
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
+
+
+@parameterized_class([
+    {
+        "org_payload": org_payload,
+        "repos_payload": repos_payload,
+        "expected_repos": expected_repos,
+        "apache2_repos": apache2_repos
+    }
+])
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """Integration tests for GithubOrgClient class"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up the class for integration tests"""
+        cls.get_patcher = patch('requests.get')
+        cls.mock_get = cls.get_patcher.start()
+
+        cls.mock_get.side_effect = cls.mock_requests
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear down the class for integration tests"""
+        cls.get_patcher.stop()
+
+    @classmethod
+    def mock_requests(cls, url):
+        """Mock requests.get() behavior"""
+        if url == f"https: //api.github.com/orgs/{
+                    cls.org_payload['login']}":
+            return cls.create_mock_response(cls.org_payload)
+        elif url == cls.org_payload['repos_url']:
+            return cls.create_mock_response(cls.repos_payload)
+        raise ValueError("Unhandled URL")
+
+    @staticmethod
+    def create_mock_response(payload):
+        """Create a mock response object"""
+        mock_response = patch('requests.Response')
+        mock_response.json.return_value = payload
+        return mock_response
+
+    def test_public_repos(self):
+        """Test public_repos returns expected repository names"""
+        client = GithubOrgClient(self.org_payload['login'])
+        repos = client.public_repos()
+        self.assertEqual(repos, self.expected_repos)
 
 
 if __name__ == '__main__':
