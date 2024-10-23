@@ -97,6 +97,3 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(client.org, mock_response)
 
         mock_get_json.assert_called_once_with(f"https://api.github.com/orgs/{org_name}")
-
-if __name__ == '__main__':
-    unittest.main()
