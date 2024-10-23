@@ -79,21 +79,3 @@ class TestClass:
             self.assertEqual(result2, 42)
 
             mock_method.assert_called_once()
-
-class TestGithubOrgClient(unittest.TestCase):
-    """Test the GithubOrgClient class"""
-
-    @parameterized.expand([
-        ("google", {"payload": True}),
-        ("abc", {"payload": False}),
-    ])
-    @patch('client.get_json')
-    def test_org(self, org_name, mock_response, mock_get_json):
-        """Test that GithubOrgClient.org returns the correct value"""
-        mock_get_json.return_value = mock_response
-
-        client = GithubOrgClient(org_name)
-
-        self.assertEqual(client.org, mock_response)
-
-        mock_get_json.assert_called_once_with(f"https://api.github.com/orgs/{org_name}")
