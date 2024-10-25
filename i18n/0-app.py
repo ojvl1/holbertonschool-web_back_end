@@ -5,10 +5,8 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
-def index():
-    web_title = 'Welcome to Holberton'
-    head1 = 'Hello world'
-    return render_template('0-index.html',
-                            web_title=web_title, head1=head1)
+def home():
+    return render_template('index.html')
 
-app.run(port=5000)
+if __name__ == "__main__":
+    app.run(debug=True)
