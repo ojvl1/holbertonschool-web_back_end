@@ -20,10 +20,12 @@ class Config:
 
 app.config.from_object(Config)
 
+
 @babel.init_app(localeselector=Config)
 def get_locale():
     ''' return best languages '''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 @app.route('/')
 def home():
