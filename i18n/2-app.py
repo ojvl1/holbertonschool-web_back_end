@@ -10,7 +10,6 @@ from flask_babel import Babel
 app = Flask(__name__)
 
 
-
 class Config(object):
     ''' App config '''
     LANGUAGES = ["en", "fr"]
@@ -22,13 +21,13 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-
 @app.route('/')
 def home():
     """
     Rendering template
     """
     return render_template('0-index.html')
+
 
 @babel.init_app
 def get_locale():
