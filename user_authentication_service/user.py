@@ -12,7 +12,7 @@ Base = declarative_base()
 
 class User(Base):
     """
-    2The model will have the following attributes:
+    The model will have the following attributes:
     id, the integer primary key
     email, a non-nullable string
     hashed_password, a non-nullable string
